@@ -1,9 +1,13 @@
 ## Financial Return Calculator Challenge 📈
 
 ### The Challenge
-Our quantitative analysis team needs a flexible command-line tool to calculate stock returns. Standard libraries provide backward-adjusted data, but for our performance models, we also need to calculate forward-adjusted returns from a specific investment date.
+Our quantitative analysis team requires a command-line interface (CLI) tool for calculating forward-adjusted stock returns. This tool is a business-critical asset for our team, as its output will directly inform performance models used for key client reporting. Accuracy and methodological transparency are the top priorities.
 
-Your mission is to build this tool. It will read unadjusted stock price data (for tickers like AAPL or TSLA), perform a user-specified return calculation, and save the results to a file, supporting multiple output formats.
+While standard data libraries provide backward-adjusted prices, our models require a forward-adjusted calculation to accurately reflect the performance of a specific investment.
+
+Your mission is to build this tool. It will read unadjusted stock price data (for tickers like AAPL or TSLA), perform a user-specified return calculation, and save the results to a file, supporting multiple output formats. Do the actual calculations yourself, do not use any libraries like pandas, ta-lib etc. You can use basic libraries to help with loading and storing the CSV, Parquet, and JSON file formats.
+
+Try to build things step by step, be methodical!
 
 ### Core Requirements
 ##### 1) Extensible Data Loading
