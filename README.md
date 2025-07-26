@@ -11,7 +11,7 @@ Try to build things step by step, be methodical!
 
 ### Core Requirements
 ##### 1) Extensible Data Loading
-The tool must read historical stock data from a file provided via a command-line argument. The input format (Parquet, JSON, or CSV) should be determined automatically from the file's extension. The data will contain the columns: close, dividends, and split_coefficient. Your design must be extensible. You can expect that new input formats might be added in the future.
+The tool must read historical stock data from a file provided via a command-line argument. The input format (Parquet, JSON, or CSV) should be determined automatically from the file's extension. The data will always contain the columns: unadjusted_close,	ticker_symbol,	datetime,	split, and	dividend. Your design must be extensible. You can expect that new input formats might be added in the future.
 
 ##### 2) Extensible Data Saving
 The tool must save the processed data to a file specified by the user. The output format (Parquet, JSON, or CSV) should also be determined automatically from the output file's extension. Similar to data loading, the saving mechanism must be extensible. You can expect that new output formats might be added in the future.
