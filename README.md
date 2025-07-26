@@ -21,7 +21,7 @@ There are two calculation modes:
 
 - mode backward: Implements the standard backward-adjusted price calculation. This method adjusts historical prices to reflect all splits and dividends that occur after that point in time, creating a consistent time series. The output should include a new column, e.g., backward_adj_close.
 
-- mode forward: Implements a forward-adjusted price calculation. This method should produce a price series that reflects the growth of an initial investment by reinvesting all dividends and accounting for splits. This is often used to calculate a total return index. The output should include a new column, e.g., forward_adj_close.
+- mode forward: Implements a [forward-adjusted price](https://quantdare.com/approach-to-dividend-adjustment-factors-calculation/) calculation. This method should produce a price series that reflects the growth of an initial investment by reinvesting all dividends and accounting for splits. This is often used to calculate a total return index. The output should include a new column, e.g., forward_adj_close. 
 
 ##### 4) Verification & Quality
 How can we be confident that your calculations are correct, especially for edge cases (e.g., a stock with no dividends, a split occurring on the start date)?
