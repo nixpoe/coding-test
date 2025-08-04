@@ -2,12 +2,8 @@ import sys
 import os
 import argparse
 
-from stock_data_cli.src.loader.parquet_loader import ParquetLoader
-from stock_data_cli.src.loader.json_loader import JsonLoader
-from stock_data_cli.src.loader.csv_loader import CsvLoader
-from stock_data_cli.src.loader.csv_saver import CsvSaver
-from stock_data_cli.src.loader.json_saver import JsonSaver
-from stock_data_cli.src.loader.parquet_saver import ParquetSaver
+from stock_data_cli.src.loader.base_loader import BaseLoader
+from stock_data_cli.src.loader.base_saver import BaseSaver
 from stock_data_cli.src.returns.forward_adjusted import ForwardAdjusted
 from stock_data_cli.src.returns.backward_adjusted import BackwardAdjusted
 
@@ -23,16 +19,11 @@ def main():
         print(f"Error: The file {args.input} does not exist.")
         sys.exit(1)
 
-    file_extension = os.path.splitext(args.input)[1].lower()
-
-    if file_extension == '.parquet':
-        loader = ParquetLoader(args.input)
-    elif file_extension == '.json':
-        loader = JsonLoader(args.input)
-    elif file_extension == '.csv':
-        loader = CsvLoader(args.input)
-    else:
-        print("Error: Unsupported file format. Please provide a CSV, JSON, or Parquet file.")
+    # Use Strategy pattern with factory method to get appropriate loader
+    try:
+        loader = BaseLoader.get_loader_for_file(args.input)
+    except ValueError as e:
+        print(f"Error: {e}")
         sys.exit(1)
 
     data = loader.load_data()
@@ -49,16 +40,13 @@ def main():
         result = adj.backward_adj()
 
     if args.output:
-        output_extension = os.path.splitext(args.output)[1].lower()
-        if output_extension == '.csv':
-            saver = CsvSaver(args.output)
-        elif output_extension == '.json':
-            saver = JsonSaver(args.output)
-        elif output_extension == '.parquet':
-            saver = ParquetSaver(args.output)
-        else:
-            print("Error: Unsupported output file format. Please use CSV, JSON, or Parquet.")
+        # Use Strategy pattern with factory method to get appropriate saver
+        try:
+            saver = BaseSaver.get_saver_for_file(args.output)
+        except ValueError as e:
+            print(f"Error: {e}")
             sys.exit(1)
+            
         saver.save(result)
         print(f"Results saved to {args.output}\n\n_____\n")
         print("Results:")

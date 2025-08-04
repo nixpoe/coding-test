@@ -12,6 +12,7 @@ class ForwardAdjusted:
             mask = df['ticker_symbol'] == ticker
             sub = df.loc[mask].copy()
             
+            # Start from oldest
             adjusted_prices = [0] * len(sub)
             adjusted_prices[0] = sub.iloc[0]['unadjusted_close']  # First price unchanged
             

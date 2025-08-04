@@ -1,13 +1,16 @@
 import pandas as pd
+from typing import List
+from .base_loader import BaseLoader
 
-REQUIRED_COLUMNS = ['unadjusted_close', 'ticker_symbol', 'datetime', 'split', 'dividend']
+class CsvLoader(BaseLoader):
+    @property
+    def supported_extensions(self) -> List[str]:
+        """CSV loader supports .csv files"""
+        return ['.csv']
 
-class CsvLoader:
-    def __init__(self, filepath, columns=None):
-        self.filepath = filepath
-
-    def load_data(self):
+    def load_data(self) -> pd.DataFrame:
         try:
+            from .base_loader import REQUIRED_COLUMNS
             data = pd.read_csv(self.filepath, usecols=REQUIRED_COLUMNS)
             return data
         except Exception as e:

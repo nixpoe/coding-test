@@ -1,12 +1,15 @@
 import pandas as pd
+from typing import List
+from .base_loader import BaseLoader
 
-REQUIRED_COLUMNS = ['unadjusted_close', 'ticker_symbol', 'datetime', 'split', 'dividend']
+class JsonLoader(BaseLoader):
+    @property
+    def supported_extensions(self) -> List[str]:
+        """JSON loader supports .json files"""
+        return ['.json']
 
-class JsonLoader:
-    def __init__(self, filepath):
-        self.filepath = filepath
-
-    def load_data(self):
+    def load_data(self) -> pd.DataFrame:
+        from .base_loader import REQUIRED_COLUMNS
         data = pd.read_json(self.filepath)
         data = data[REQUIRED_COLUMNS]
         return data
