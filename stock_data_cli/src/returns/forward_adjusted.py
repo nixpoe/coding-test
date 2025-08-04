@@ -28,7 +28,7 @@ class ForwardAdjusted:
                     cumulative_factor *= prev_split
                 if prev_dividend > 0:
                     # Add dividend reinvestment effect
-                    cumulative_factor *= (1 + prev_dividend / sub.iloc[i-1]['unadjusted_close'])
+                    cumulative_factor *= (1 + prev_dividend / adjusted_prices[i-1])
                     
                 adjusted_prices[i] = round(current_price * cumulative_factor, 2)
             

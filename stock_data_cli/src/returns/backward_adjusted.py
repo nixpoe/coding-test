@@ -28,8 +28,7 @@ class BackwardAdjusted:
                 if next_split != 1.0:
                     cumulative_factor /= next_split
                 if next_dividend > 0:
-                    next_price = adjusted_prices[i + 1]
-                    cumulative_factor *= (next_price - next_dividend) / next_price
+                    cumulative_factor *= (adjusted_prices[i + 1] - next_dividend) / adjusted_prices[i + 1]
                 
                 adjusted_prices[i] = round(current_price * cumulative_factor, 2)
             
