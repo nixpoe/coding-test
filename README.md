@@ -9,6 +9,19 @@ A command-line tool for calculating forward and backward adjusted stock prices, 
 - **Multiple Formats**: Supports CSV, JSON, and Parquet input/output files
 - **Extensible**: Easy to add new file formats and calculation methods
 
+## Installation
+
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd PocetniZadatak
+```
+
+2. Install dependencies:
+```bash
+pip install pandas pyarrow
+```
+
 ## Usage
 
 ### Basic Command Structure

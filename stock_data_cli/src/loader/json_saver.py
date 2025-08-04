@@ -1,6 +1,12 @@
-class JsonSaver:
-    def __init__(self, filepath):
-        self.filepath = filepath
+import pandas as pd
+from typing import List
+from .base_saver import BaseSaver
 
-    def save(self, data):
-        data.to_json(self.filepath, orient='records', lines=True)
+class JsonSaver(BaseSaver):
+    @property
+    def supported_extensions(self) -> List[str]:
+        """JSON saver supports .json files"""
+        return ['.json']
+
+    def save(self, data: pd.DataFrame) -> None:
+        data.to_json(self.filepath, orient='records', indent=2)
